@@ -3,7 +3,7 @@
 .uiGuider {
 
   display: none; position: absolute; z-index: 2000;
-  width: 350px; color: $colors_text_on_white; font-size: 0px;
+  width: 350px; color: #1265ad; font-size: 0px;
   background: #eecf84 asset_url("ui_guiders/box_bgrnd.png", "image"); background-repeat: repeat-x;
 
   .content {
