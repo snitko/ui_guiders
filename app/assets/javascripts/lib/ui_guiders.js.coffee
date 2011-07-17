@@ -1,10 +1,5 @@
 jQuery ($) ->
 
-  # TODO
-  #  * Cookies telling not to show a particular guider
-  #  * manual arrow positioning
-  #  * auto guider positioning: auto detect which side
-  #    of the screen (left-vs-right & top-vs-bottom it should appear)
   window.UIGuider = class UIGuider
       
     constructor: (@block) ->
