@@ -22,7 +22,7 @@ See Screenshot.png file for a small demonstration of how it looks.
 INSTALLATION
 ------------
 
-1. git submodule add git://github.com/snitko/ui_guiders.git vendor/plugins/ui_guider
+1. git submodule add git://github.com/snitko/ui_guiders.git vendor/plugins/ui_guiders
 
 2. 
   (a) Add to your scss: `@import "ui_guiders";` OR
