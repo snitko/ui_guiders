@@ -1,4 +1,4 @@
-module UiGuiderHelper
+module UiGuidersHelper
 
   def ui_guider(options={}, &block)
     return if cookies["UIGuider_#{options[:id]}"] 
