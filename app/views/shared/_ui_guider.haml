@@ -1,0 +1,10 @@
+.uiGuider{ "data-target-element" => options[:target], :class => options[:class], :id => options[:id] }
+
+  = image_tag "ui_guider/top_arrow.png", :class => "arrow top"
+  .clearfix
+  = image_tag "ui_guider/close_ico.png", :class => "close"
+
+  .content
+    = content
+
+  = image_tag "ui-guider/bottom_arrow.png", :class => "arrow bottom"
