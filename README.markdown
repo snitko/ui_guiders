@@ -26,7 +26,7 @@ INSTALLATION
 
 2. 
   (a) Add to your scss: `@import "ui_guiders";` OR
-  (b) Add to your layout: `stylesheet_link_tag 'shared'`
+  (b) Add to your layout: `stylesheet_link_tag 'ui_guiders'`
 
 3.
   (a) Add to your application.js.coffee `#= require lib/ui_guiders` OR
