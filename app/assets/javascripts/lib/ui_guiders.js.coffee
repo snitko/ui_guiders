@@ -2,10 +2,12 @@ jQuery ($) ->
 
   window.UIGuider = class UIGuider
       
-    constructor: (@block) ->
-      @target       = $(@block.attr("data-target-element"))
+    constructor: (block) ->
+      @block        = $(block)
+      @target       = $($(@block).attr("data-target-element"))
       @top_arrow    = @block.children(".arrow.top")
       @bottom_arrow = @block.children(".arrow.bottom")
+      @state = "hidden"
 
       # Places arrow to the right corner of the Guider.
       # It's top/bottom and left/right position is always equal to that
@@ -26,13 +28,13 @@ jQuery ($) ->
           top_offset = @target.offset().top - @block.height() - @block.children(".arrow").height()
 
         if pos.x == "left"
-          left_offset = @target.offset().left + @target.width()/2 - @block.children(".arrow").width() 
+          left_offset = @target.offset().left + @target.width()/2 - @block.children(".arrow").width()
         else
           left_offset = @target.offset().left - @block.width() - @block.children(".arrow").width() + @target.width()/2
-          
-        @block.offset
-          top: top_offset
-          left: left_offset
+
+        @block.css { top: top_offset }
+        @block.css { left: left_offset }
+
 
       @set_cookie = () ->
         $.cookie("UIGuider_#{@block.attr("id")}", "1", { expires: 3560 }) if @block.hasClass("show_once") and @block.attr("id")
@@ -58,17 +60,21 @@ jQuery ($) ->
       @place_guider @target_location()
       @set_cookie()
       @block.fadeIn(500)
+      @state = "visible"
 
     hide: () ->
       @block.hide()
+      @state = "hidden"
   
 
-
-  setTimeout () ->
-    $(".uiGuider.autoshow").each () ->
-      guider = new UIGuider($(this))
-      guider.show()
-  , 1000
-
-  $(".uiGuider .close").click () ->
-    $(this).parent().hide()
+  $(".uiGuider").each () ->
+    g = new UIGuider($(this))
+    if g.block.hasClass("autoshow")
+      setTimeout () ->
+        g.show()
+      , 1000
+    if g.block.attr("data-event-name").length > 0
+      g.target.bind g.block.attr("data-event-name"), () ->
+        g.show() unless g.state == "visible"
+      g.block.find(".close").click () ->
+        g.hide()

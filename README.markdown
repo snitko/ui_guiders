@@ -38,7 +38,7 @@ Usage
 
 This is what you put in your views (haml example):
 
-    = ui_guider :target => "header .menuItem1", :autoshow => true, :show_once => true, :id => "menu_item_1_guider", :class => "myclass" do
+    = ui_guider :target => "header .menuItem1", :autoshow => true, :event => "click", :show_once => true, :id => "menu_item_1_guider", :class => "myclass" do
         text explaining
         this awesome menuitem
 
@@ -51,18 +51,10 @@ Other options explanation:
 `:show_once` Saves cookie with the id of the guider. Next time the user visits, the guider is not shown.
              Default is false.
 
+`:event`     jQuery event (for example `click` or `mouseover`) which is binded to the target and on which the guider is shown.
+
 `:id`
 `:class`     Both are applied to the html-element.
-
-
-### Showing guiders on events in your javascript
-
-All you need to understand is that there's a class called UIGuider an instance of which should be created when you
-want to display a guider on the screen. Let's say a user click on the button:
-
-    $(".button").click(function() {
-      new UIGuider("#button_clicking_gudier").show()
-    })
 
 
 Customization
@@ -70,11 +62,19 @@ Customization
 * Want different styles?
   copy `app/assets/stylesheets/ui_guiders.css.scss` from the plugin dir and change it.
 
-* Want a different markup?
-  copy `app/assets/views/shared/_ui_guider.haml` from the plugin dir and change it.
-
 * Replacing images?
   You guessed it right. Copy `app/assets/images/ui_guiders/` from the plugin dir and change it.
+
+For images and stylesheets make sure your `app/assets` dir loads last, so that Rails loads *your* files.
+I managed to do it with
+
+    config.assets.paths << "#{Rails.root}/app/assets/stylesheets/" 
+    config.assets.paths << "#{Rails.root}/app/assets/images/"
+
+in my `config/application.rb`
+
+* Want a different markup?
+  copy `app/assets/views/shared/_ui_guider.haml` from the plugin dir and change it.
 
 
 Requirements
