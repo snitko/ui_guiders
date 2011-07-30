@@ -1,11 +1,11 @@
 .uiGuider {
 
   display: none; position: absolute; z-index: 2000;
-  width: 350px; color: #1265ad; font-size: 0px;
+  width: 350px; color: #000; font-size: 0px;
   background: #eecf84 asset_url("ui_guiders/box_bgrnd.png", "image"); background-repeat: repeat-x;
 
   .content {
-    padding: 1em; margin: -5px 0 0 0; font-size: 14px;
+    padding: 1em; margin: -5px 0 0 0; font-size: 11px;
     a, a:visited { color: #a20000; }  
   }
 
@@ -17,7 +17,7 @@
   img.arrow.bottom.right { top: 0; left: -5px; float: right; margin: 0 0 -5px 0; }
   
 
-  img.close { position: relative; cursor: pointer; float: right; right: 8px; top: 8px; opacity: 0.3; margin: 0 0 15px 15px; }
-  img.close:hover { opacity: 0.5; }
+  img.close { position: relative; cursor: pointer; float: right; right: 8px; top: 8px; opacity: 0.3; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30); margin: 0 0 15px 15px; }
+  img.close:hover { opacity: 0.5; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50); }
 
 }
