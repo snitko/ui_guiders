@@ -55,6 +55,8 @@ jQuery ($) ->
         @target_location_cached = { x: x, y: y }
 
     show: () ->
+      for guider in ui_guiders
+        guider.hide()
       return if $.cookie("UIGuider_#{@block.attr("id")}")
       @place_arrow  @target_location()
       @place_guider @target_location()
@@ -67,8 +69,9 @@ jQuery ($) ->
       @state = "hidden"
   
 
+  ui_guiders = []
   $(".uiGuider").each () ->
-    g = new UIGuider($(this))
+    g = new UIGuider($(this)); ui_guiders.push g
     if g.block.hasClass("autoshow")
       setTimeout () ->
         g.show()
@@ -78,3 +81,4 @@ jQuery ($) ->
         g.show() unless g.state == "visible"
       g.block.find(".close").click () ->
         g.hide()
+
