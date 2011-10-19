@@ -48,6 +48,10 @@ Other options explanation:
 `:autoshow`  if true, js-part of the plugin will force the guider to appear up
              immediately after the page loads. Default is false.
 
+`:autohide`  if true, it hides the guider whenever the `mouseout` event happens on the target element.
+             The close ico does not appear if this option is enabled (because this option also adds `autohide` class to
+             the .uiGuider element, and default css sets a `display` property of `img.close` in it to `none`).
+
 `:show_once` Saves cookie with the id of the guider. Next time the user visits, the guider is not shown.
              Default is false.
 

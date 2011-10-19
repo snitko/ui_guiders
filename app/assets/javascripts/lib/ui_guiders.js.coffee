@@ -71,14 +71,19 @@ jQuery ($) ->
 
   ui_guiders = []
   $(".uiGuider").each () ->
+
     g = new UIGuider($(this)); ui_guiders.push g
     if g.block.hasClass("autoshow")
       setTimeout () ->
         g.show()
       , 1000
+
+    if g.block.hasClass("autohide")
+      g.target.bind "mouseout", () ->
+        g.hide()
+    
     if g.block.attr("data-event-name").length > 0
       g.target.bind g.block.attr("data-event-name"), () ->
         g.show() unless g.state == "visible"
       g.block.find(".close").click () ->
         g.hide()
-

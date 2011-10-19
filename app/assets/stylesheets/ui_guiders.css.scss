@@ -20,4 +20,6 @@
   img.close { position: relative; cursor: pointer; float: right; right: 8px; top: 8px; opacity: 0.3; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30); margin: 0 0 15px 15px; }
   img.close:hover { opacity: 0.5; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50); }
 
+  &.autohide img.close { display: none; }
+
 }

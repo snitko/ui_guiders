@@ -11,6 +11,7 @@ module UiGuidersHelper
     end
     options[:class] = ""            unless options[:class]
     options[:class] += " autoshow"  if     options[:autoshow]
+    options[:class] += " autohide"  if     options[:autohide]
     options[:class] += " show_once" if     options[:show_once]
     render :partial => "shared/ui_guider", :locals => { :content => content, :options => options }
   end
