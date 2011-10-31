@@ -82,8 +82,9 @@ jQuery ($) ->
       g.target.bind "mouseout", () ->
         g.hide()
     
-    if g.block.attr("data-event-name").length > 0
+    if g.block.attr("data-event-name") && g.block.attr("data-event-name").length > 0
       g.target.bind g.block.attr("data-event-name"), () ->
         g.show() unless g.state == "visible"
-      g.block.find(".close").click () ->
-        g.hide()
+
+    g.block.find(".close").click () ->
+      g.hide()
