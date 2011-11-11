@@ -54,13 +54,13 @@ jQuery ($) ->
           y = "top"
         @target_location_cached = { x: x, y: y }
 
-    show: () ->
-      for guider in ui_guiders
-        guider.hide()
+    show: (content=null) ->
+      UIGuidersCollection.hide_all()
       return if $.cookie("UIGuider_#{@block.attr("id")}")
       @place_arrow  @target_location()
       @place_guider @target_location()
       @set_cookie()
+      @block.find(".content").html(content) if content
       @block.fadeIn(500)
       @state = "visible"
 
@@ -69,22 +69,44 @@ jQuery ($) ->
       @state = "hidden"
   
 
-  ui_guiders = []
-  $(".uiGuider").each () ->
+  class _UIGuidersCollection
 
-    g = new UIGuider($(this)); ui_guiders.push g
-    if g.block.hasClass("autoshow")
-      setTimeout () ->
-        g.show()
-      , 1000
 
-    if g.block.hasClass("autohide")
-      g.target.bind "mouseout", () ->
-        g.hide()
+    constructor: () ->
     
-    if g.block.attr("data-event-name") && g.block.attr("data-event-name").length > 0
-      g.target.bind g.block.attr("data-event-name"), () ->
-        g.show() unless g.state == "visible"
+      @ui_guiders = []
+      for g in $(".uiGuider")
+        @ui_guiders.push new UIGuider(g)
 
-    g.block.find(".close").click () ->
-      g.hide()
+      for g in @ui_guiders
+        if g.block.hasClass("autoshow")
+          setTimeout () ->
+            g.show()
+          , 1000
+
+        if g.block.hasClass("autohide")
+          g.target.bind "mouseout", { guider: g }, (event) ->
+            event.data.guider.hide()
+        
+        if g.block.attr("data-event-name") && g.block.attr("data-event-name").length > 0
+          g.target.bind g.block.attr("data-event-name"), { guider: g }, (event) =>
+            event.data.guider.show() unless event.data.guider.state == "visible"
+
+        g.block.find(".close").click () ->
+          g.hide()
+
+
+    find: (id) ->
+      result = null
+      for guider in @ui_guiders
+        result = guider if guider.block.attr("id") == id
+      result
+
+    hide_all: () ->
+      for guider in @ui_guiders
+        guider.hide()
+
+
+  window.UIGuidersCollection = new _UIGuidersCollection()
+
+
