@@ -21,14 +21,19 @@ jQuery ($) ->
       # Places Guider so that its arrow always points to the target.
       # It will point to either the top or the bottom border of the target
       # right in the middle of it.
-      @place_guider = (pos) ->
+      @place_guider = (pos, options={}) ->
         if pos.y == "top"
           top_offset = @target.offset().top + @target.height() + @block.children(".arrow").height()
         else
           top_offset = @target.offset().top - @block.height() - @block.children(".arrow").height()
 
         if pos.x == "left"
-          left_offset = @target.offset().left + @target.width()/2 - @block.children(".arrow").width()
+          left_offset = if options["edge"] == "left"
+             @target.offset().left
+          else if options["edge"] == "right"
+            @target.offset().left + @target.width()
+          else
+            @target.offset().left + @target.width()/2 - @block.children(".arrow").width()
         else
           left_offset = @target.offset().left - @block.width() - @block.children(".arrow").width() + @target.width()/2
 
@@ -54,13 +59,13 @@ jQuery ($) ->
           y = "top"
         @target_location_cached = { x: x, y: y }
 
-    show: (content=null) ->
+    show: (options={}) ->
       UIGuidersCollection.hide_all()
       return if $.cookie("UIGuider_#{@block.attr("id")}")
       @place_arrow  @target_location()
-      @place_guider @target_location()
+      @place_guider @target_location(), options
       @set_cookie()
-      @block.find(".content").html(content) if content
+      @block.find(".content").html(options["content"]) if options["content"]
       @block.fadeIn(500)
       @state = "visible"
 
@@ -108,5 +113,3 @@ jQuery ($) ->
 
 
   window.UIGuidersCollection = new _UIGuidersCollection()
-
-
