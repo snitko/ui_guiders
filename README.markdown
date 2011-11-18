@@ -45,20 +45,27 @@ This is what you put in your views (haml example):
 That's it. Now when your page is loaded a shiny yellow guider will appear pointing at the DOM element you specified with the :target option.
 Other options explanation:
 
-`:autoshow`  if true, js-part of the plugin will force the guider to appear up
-             immediately after the page loads. Default is false.
+`:autoshow`    if true, js-part of the plugin will force the guider to appear up
+               immediately after the page loads. Default is false.
 
-`:autohide`  if true, it hides the guider whenever the `mouseout` event happens on the target element.
-             The close ico does not appear if this option is enabled (because this option also adds `autohide` class to
-             the .uiGuider element, and default css sets a `display` property of `img.close` in it to `none`).
+`:autohide`    if true, it hides the guider whenever the `mouseout` event happens on the target element.
+               The close ico does not appear if this option is enabled (because this option also adds `autohide` class to
+               the .uiGuider element, and default css sets a `display` property of `img.close` in it to `none`).
 
-`:show_once` Saves cookie with the id of the guider. Next time the user visits, the guider is not shown.
-             Default is false.
+`:show_once`   Saves cookie with the id of the guider. Next time the user visits, the guider is not shown.
+               Default is false.
 
-`:event`     jQuery event (for example `click` or `mouseover`) which is binded to the target and on which the guider is shown.
+`:event`       jQuery event (for example `click` or `mouseover`) which is binded to the target and on which the guider is shown.
+
+`:side_arrow`  Normally the arrow would appear either on top or the bottom side of the guider, but with this option set to true, you can an arrow
+               on either left or right side of the guider. Use with caution, as this may force horizontal scrollbars to appear if your targer is
+               placed to close the edge of the screen.
+
+`:target_edge` Sets a horizontal location on the target for the arrow to point to, possible values are "left", "right" or "middle"
+               (default is "middle").
 
 `:id`
-`:class`     Both are applied to the html-element.
+`:class`       Both are applied to the html-element.
 
 
 Customization

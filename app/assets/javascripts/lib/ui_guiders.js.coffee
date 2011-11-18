@@ -5,40 +5,74 @@ jQuery ($) ->
     constructor: (block) ->
       @block        = $(block)
       @target       = $($(@block).attr("data-target-element"))
-      @top_arrow    = @block.children(".arrow.top")
-      @bottom_arrow = @block.children(".arrow.bottom")
+      @arrows = {
+        top:    @block.children(".arrow.top")
+        bottom: @block.children(".arrow.bottom")
+        left:   @block.children(".arrow.side.left")
+        right:  @block.children(".arrow.side.right")
+      }
       @state = "hidden"
+
+      @hide_arrows = () ->
+        for a in @arrows
+          a.hide()
 
       # Places arrow to the right corner of the Guider.
       # It's top/bottom and left/right position is always equal to that
       # of a target.
-      @place_arrow = (pos) ->
-        if pos.y == "bottom"
-          @top_arrow.hide(); @bottom_arrow.show().addClass(pos.x)
+      @place_arrow = (pos, options={}) ->
+        @hide_arrows()
+        if options.side_arrow
+          @arrows[pos.x].css(top: -@block.height()/2).show()
         else
-          @top_arrow.addClass(pos.x)
+          @arrows[pos.y].show().addClass(pos.x)
         
       # Places Guider so that its arrow always points to the target.
-      # It will point to either the top or the bottom border of the target
-      # right in the middle of it.
+      # Depending on the position of the target the guider will appear on the left
+      # or on the right side of the target.
+      #
+      # To set a horizontal location on the target for the arrow to point to,
+      # use "edge" option for that with "left", "right" or "middle" (default is "middle").
+      #
+      # To set the type of arrow (side arrow or arrows appearing on the top or the bottom of the guider),
+      # set "side_arrow" option to true.
       @place_guider = (pos, options={}) ->
-        if pos.y == "top"
-          top_offset = @target.offset().top + @target.height() + @block.children(".arrow").height()
+
+        if options.side_arrow
+          arrow = @arrows.left
+          arrow_offset_sign = 1
         else
-          top_offset = @target.offset().top - @block.height() - @block.children(".arrow").height()
+          arrow = @arrows.top
+          arrow_offset_sign = -1
+
+        if options.side_arrow
+          top_offset = @target.offset().top + @target.height()/2 - @block.height()/2
+        else if pos.y == "top"
+          top_offset = @target.offset().top + @target.height() + arrow.height()
+        else
+          top_offset = @target.offset().top - @block.height() - arrow.height()
 
         if pos.x == "left"
-          left_offset = if options["edge"] == "left"
-             @target.offset().left
-          else if options["edge"] == "right"
-            @target.offset().left + @target.width()
+          pos_left_offset = @target.offset().left + arrow.width()*arrow_offset_sign
+          if options.edge == "left"
+            width_left_offset = 0
+          else if options.edge == "right"
+            width_left_offset = @target.width()
           else
-            @target.offset().left + @target.width()/2 - @block.children(".arrow").width()
+            width_left_offset = @target.width()/2
         else
-          left_offset = @target.offset().left - @block.width() - @block.children(".arrow").width() + @target.width()/2
+          arrow_offset_sign = -arrow_offset_sign
+          pos_left_offset = @target.offset().left + arrow.width()*arrow_offset_sign
+          if options.edge == "left"
+            width_left_offset = -@block.width()
+          else if options.edge == "right"
+            width_left_offset = -@block.width() + @target.width()
+          else
+            width_left_offset = -@block.width() + @target.width()/2
+
 
         @block.css { top: top_offset }
-        @block.css { left: left_offset }
+        @block.css { left: pos_left_offset + width_left_offset }
 
 
       @set_cookie = () ->
@@ -62,8 +96,13 @@ jQuery ($) ->
     show: (options={}) ->
       UIGuidersCollection.hide_all()
       return if $.cookie("UIGuider_#{@block.attr("id")}")
-      @place_arrow  @target_location()
+
+      options["side_arrow"]  = true                            if @block.hasClass("side_arrow")
+      options["edge"]        = @block.attr("data-target-edge") if @block.attr("data-target-edge")
+
+      @place_arrow  @target_location(), options
       @place_guider @target_location(), options
+
       @set_cookie()
       @block.find(".content").html(options["content"]) if options["content"]
       @block.fadeIn(500)

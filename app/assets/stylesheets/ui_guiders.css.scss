@@ -9,12 +9,15 @@
     a, a:visited { color: #a20000; }  
   }
 
-  img.arrow           { position: relative; display: block; height: 5px; width: 13px; }
-  img.arrow.bottom    { display: none; }
+  img.arrow           { position: relative; display: none; height: 5px; width: 13px; }
   img.arrow.top.left  { top: -5px; left: 5px; margin: 0 0 0 0; }
   img.arrow.top.right { top: -5px; left: -5px; float: right; margin: 0 0 0 0; }
   img.arrow.bottom.left { top: 0; left: 5px; margin: 0 0 -5px 0; }
   img.arrow.bottom.right { top: 0; left: -5px; float: right; margin: 0 0 -5px 0; }
+
+  img.arrow.side { width: 5px; height: 13px; }
+  img.arrow.side.left  { left: -5px; }
+  img.arrow.side.right { float: right; right: -5px; }
   
 
   img.close { position: relative; cursor: pointer; float: right; right: 8px; top: 8px; opacity: 0.3; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30); margin: 0 0 15px 15px; }
