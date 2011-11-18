@@ -23,7 +23,7 @@ jQuery ($) ->
       @place_arrow = (pos, options={}) ->
         @hide_arrows()
         if options.side_arrow
-          @arrows[pos.x].css(top: -@block.height()/2).show()
+          @arrows[pos.x].css(top: @block.height()/2 - @arrows.left.height()).show()
         else
           @arrows[pos.y].show().addClass(pos.x)
         

@@ -1,13 +1,11 @@
 .uiGuider{ "data-target-element" => options[:target], "data-event-name" => options[:event], :class => options[:class], :id => options[:id], "data-target-edge" => options[:target_edge] }
 
   = image_tag "ui_guiders/top_arrow.png", :class => "arrow top"
-  .clearfix
+  = image_tag "ui_guiders/left_arrow.png",  :class => "arrow side left"
+  = image_tag "ui_guiders/right_arrow.png", :class => "arrow side right"
   = image_tag "ui_guiders/close_ico.png", :class => "close"
 
   .content
     = content
 
   = image_tag "ui_guiders/bottom_arrow.png", :class => "arrow bottom"
-
-  = image_tag "ui_guiders/left_arrow.png",  :class => "arrow side left"
-  = image_tag "ui_guiders/right_arrow.png", :class => "arrow side right"
