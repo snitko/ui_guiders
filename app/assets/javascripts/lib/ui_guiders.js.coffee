@@ -99,6 +99,7 @@ jQuery ($) ->
 
       options["side_arrow"]  = true                            if @block.hasClass("side_arrow")
       options["edge"]        = @block.attr("data-target-edge") if @block.attr("data-target-edge")
+      @target = options.target   
 
       @place_arrow  @target_location(), options
       @place_guider @target_location(), options
@@ -134,7 +135,7 @@ jQuery ($) ->
         
         if g.block.attr("data-event-name") && g.block.attr("data-event-name").length > 0
           g.target.bind g.block.attr("data-event-name"), { guider: g }, (event) =>
-            event.data.guider.show() unless event.data.guider.state == "visible"
+            event.data.guider.show(target: $(event.currentTarget)) unless event.data.guider.state == "visible"
 
         g.block.find(".close").click () ->
           g.hide()
