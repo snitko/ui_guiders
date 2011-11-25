@@ -99,7 +99,7 @@ jQuery ($) ->
 
       options["side_arrow"]  = true                            if @block.hasClass("side_arrow")
       options["edge"]        = @block.attr("data-target-edge") if @block.attr("data-target-edge")
-      @target = options.target   
+      @target = options.target                                 if options.target
 
       @place_arrow  @target_location(), options
       @place_guider @target_location(), options
