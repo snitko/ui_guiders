@@ -151,5 +151,5 @@ jQuery ($) ->
       for guider in @ui_guiders
         guider.hide()
 
-
-  window.UIGuidersCollection = new _UIGuidersCollection()
+  window._UIGuidersCollection = _UIGuidersCollection
+  window.UIGuidersCollection  = new _UIGuidersCollection()
