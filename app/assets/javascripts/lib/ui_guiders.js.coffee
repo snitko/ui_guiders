@@ -94,6 +94,7 @@ jQuery ($) ->
         @target_location_cached = { x: x, y: y }
 
     show: (options={}) ->
+      return if @hiding
       UIGuidersCollection.hide_all()
       return if $.cookie("UIGuider_#{@block.attr("id")}")
 
@@ -106,11 +107,14 @@ jQuery ($) ->
 
       @set_cookie()
       @block.find(".content").html(options["content"]) if options["content"]
-      @block.fadeIn(500)
+      @block.fadeIn(300)
       @state = "visible"
 
     hide: () ->
-      @block.hide()
+      return if @hiding
+      @hiding = true
+      @block.fadeOut 300, () =>
+        @hiding = false
       @state = "hidden"
   
 
@@ -130,7 +134,7 @@ jQuery ($) ->
           , 1000
 
         if g.block.hasClass("autohide")
-          g.target.bind "mouseout", { guider: g }, (event) ->
+          g.target.bind "mouseleave", { guider: g }, (event) ->
             event.data.guider.hide()
         
         if g.block.attr("data-event-name") && g.block.attr("data-event-name").length > 0
