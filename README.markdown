@@ -4,6 +4,8 @@ UIGuiders
 *Visual guiders for website UIs*
 It's like "Guiders-JS", but easily customizable and less js-centric.
 
+![Screenshot](https://github.com/snitko/ui_guiders/raw/master/Screenshot.png)
+
 Why?
 ----
 Because I wanted an easy soulution that wouldn't be all javascript. I don't think it's a good idea to assign
