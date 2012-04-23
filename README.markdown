@@ -1,7 +1,7 @@
 UIGuiders
 =========
 
-*Visual guiders for website UIs (Rails Plugin)*
+*Visual guiders for website UIs*
 It's like "Guiders-JS", but easily customizable and less js-centric.
 
 Why?
@@ -22,7 +22,7 @@ See Screenshot.png file for a small demonstration of how it looks.
 INSTALLATION
 ------------
 
-1. git submodule add git://github.com/snitko/ui_guiders.git vendor/plugins/ui_guiders
+1. gem install ui_guiders
 
 2. 
   (a) Add to your scss: `@import "ui_guiders";` OR
@@ -71,10 +71,10 @@ Other options explanation:
 Customization
 -------------
 * Want different styles?
-  copy `app/assets/stylesheets/ui_guiders.css.scss` from the plugin dir and change it.
+  copy `app/assets/stylesheets/ui_guiders.css.scss` from the gem dir and change it.
 
 * Replacing images?
-  You guessed it right. Copy `app/assets/images/ui_guiders/` from the plugin dir and change it.
+  You guessed it right. Copy `app/assets/images/ui_guiders/` from the gem dir and change it.
 
 For images and stylesheets make sure your `app/assets` dir loads last, so that Rails loads *your* files.
 I managed to do it with
