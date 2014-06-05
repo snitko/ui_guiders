@@ -7,7 +7,7 @@
 
   display: none; position: absolute; z-index: 2000;
   width: 350px; color: #000; font-size: 0px;
-  background: #eecf84 asset_url("ui_guiders/box_bgrnd.png", "image"); background-repeat: repeat-x;
+  background: #eecf84 asset_url("ui_guiders/box_bgrnd.png"); background-repeat: repeat-x;
 
   .content {
     padding: 1em; margin: -5px 0 0 0; font-size: 11px;
